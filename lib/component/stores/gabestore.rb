@@ -1,6 +1,5 @@
-require 'open-uri'
-require 'nokogiri'
-require 'mechanize'
+GABESTORE_STORE_URL = 'https://gabestore.ru/game/'
+GABESTORE_GAME_PARS = "//font[@class='currencyPrice']"
 
 class Gabestore
 
@@ -9,7 +8,7 @@ class Gabestore
     game_name = message.split(/\W+/).join('-').downcase
 
     begin
-      url = "https://gabestore.ru/game/#{game_name}"
+      url = GABESTORE_STORE_URL + game_name
       doc = Nokogiri::HTML(open(url))
     rescue OpenURI::HTTPError => e
       if e.message == '404 Not Found'
@@ -22,7 +21,7 @@ class Gabestore
     gabestore = if doc.nil?
       'The game is not present in the Gabestore'
     else
-      price = doc.xpath("//font[@class='currencyPrice']").children[3].text.split(/\W+/)[1].to_i
+      price = doc.xpath(GABESTORE_GAME_PARS).children[3].text.split(/\W+/)[1].to_i
       "
       Gabestore: #{price} RUB
        #{url}

@@ -1,8 +1,7 @@
-require 'open-uri'
-require 'nokogiri'
-require 'mechanize'
-
-NO_RESULT_SEARCH = ['https://steamcommunity.com/games/593110/partnerevents/view/1714119088658959583']
+NO_RESULT_SEARCH  = ['https://steamcommunity.com/games/593110/partnerevents/view/1714119088658959583']
+STEAM_STORE_URL   = 'https://store.steampowered.com/search/?term='
+STEAM_SEARCH_PARS = "//a[@href]"
+STEAM_GAME_PARS   = "//div[@class='game_purchase_price price']"
 
 class Steam
 
@@ -10,15 +9,15 @@ class Steam
 
     game_name = message.split(/\W+/).join('+').downcase
 
-    url = "https://store.steampowered.com/search/?term=#{game_name}"
+    url = STEAM_STORE_URL + game_name
     doc = Nokogiri::HTML(open(url))
-    game_link = doc.xpath("//a[@href]")[121].attributes["href"].value
+    game_link = doc.xpath(STEAM_SEARCH_PARS)[121].attributes["href"].value
 
     if NO_RESULT_SEARCH.include?(game_link)
       steam = 'The game is not present in the Steam'
     else
       doc = Nokogiri::HTML(open(game_link))
-      price = doc.xpath("//div[@class='game_purchase_price price']")[0].children[0].text.to_i
+      price = doc.xpath(STEAM_GAME_PARS)[0].children[0].text.to_i
 
       steam = if price == 0
         "
