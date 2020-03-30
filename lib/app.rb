@@ -4,14 +4,11 @@ require 'mechanize'
 require 'telegram/bot'
 
 require_relative 'component/bot_answer'
-
-TOKEN = '1110569125:AAHblQeOz64XgQtSnXEm4IiTbzpHB9i289E'
-BOT_ANSWER = BotAnswer.new
+require_relative '../constant'
+require_relative '../secret_token'
 
 Telegram::Bot::Client.run(TOKEN) do |bot|
-
   bot.listen do |message|
-
     case message.text
 
     when '/start'

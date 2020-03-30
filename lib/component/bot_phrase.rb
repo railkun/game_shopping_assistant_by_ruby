@@ -1,5 +1,4 @@
 class BotPhrase
-
   def self.greeting(user_name)
     "
     Hello, #{user_name}

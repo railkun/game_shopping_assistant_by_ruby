@@ -5,13 +5,12 @@ require_relative 'stores/zaka_zaka'
 require_relative 'bot_phrase'
 
 class BotAnswer
-
-  def bot_game_search_result(gama_name)
+  def bot_game_search_result(name)
     "
-      #{Steam.game_search(gama_name)}
-      #{ZakaZaka.game_search(gama_name)}
-      #{Gabestore.game_search(gama_name)}
-      #{Steampay.game_search(gama_name)}
+      #{Steam.search(name)}
+      #{ZakaZaka.search(name)}
+      #{Gabestore.search(name)}
+      #{Steampay.search(name)}
     "
   end
 
