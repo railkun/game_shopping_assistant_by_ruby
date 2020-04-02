@@ -2,6 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'mechanize'
 require 'telegram/bot'
+require 'pry'
 
 require_relative '../secret_token'
 require_relative 'component/bot_answer'
