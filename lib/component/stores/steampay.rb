@@ -1,3 +1,6 @@
+STEAMPAY_URL  = 'https://steampay.com/game/'.freeze
+STEAMPAY_PARS = "//div[@class='product__current-price']".freeze
+
 class Steampay
   def self.search(message)
     game_name = message.split(/\W+/).join('-').downcase
@@ -6,7 +9,7 @@ class Steampay
       url = STEAMPAY_URL + game_name
       doc = Nokogiri::HTML(URI.parse(url).open)
     rescue OpenURI::HTTPError => e
-      raise e unless e.message == NOT_FOUND
+      raise e unless e.message == '404 Not Found'
     end
 
     if doc.nil?

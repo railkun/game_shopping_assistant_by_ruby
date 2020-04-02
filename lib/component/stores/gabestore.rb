@@ -1,3 +1,6 @@
+GABESTORE_URL  = 'https://gabestore.ru/game/'.freeze
+GABESTORE_PARS = "//font[@class='currencyPrice']".freeze
+
 class Gabestore
   def self.search(message)
     game_name = message.split(/\W+/).join('-').downcase
@@ -6,7 +9,7 @@ class Gabestore
       url = GABESTORE_URL + game_name
       doc = Nokogiri::HTML(URI.parse(url).open)
     rescue OpenURI::HTTPError => e
-      raise e unless e.message == NOT_FOUND
+      raise e unless e.message == '404 Not Found'
     end
 
     if doc.nil?

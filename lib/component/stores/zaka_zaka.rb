@@ -1,3 +1,6 @@
+ZAKAZAKA_URL  = 'https://zaka-zaka.com/game/'.freeze
+ZAKAZAKA_PARS = "//div[@class='price']".freeze
+
 class ZakaZaka
   def self.search(message)
     game_name = message.split(/\W+/).join('-').downcase
@@ -10,7 +13,7 @@ class ZakaZaka
         url = ZAKAZAKA_URL + game_name
         doc = Nokogiri::HTML(URI.parse(url).open)
       rescue OpenURI::HTTPError => e
-        raise e unless e.message == NOT_FOUND
+        raise e unless e.message == '404 Not Found'
       end
 
       if doc.nil?

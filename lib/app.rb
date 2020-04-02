@@ -3,9 +3,10 @@ require 'nokogiri'
 require 'mechanize'
 require 'telegram/bot'
 
-require_relative 'component/bot_answer'
-require_relative '../constant'
 require_relative '../secret_token'
+require_relative 'component/bot_answer'
+
+BOT_ANSWER = BotAnswer.new
 
 Telegram::Bot::Client.run(TOKEN) do |bot|
   bot.listen do |message|

@@ -15,5 +15,5 @@ Metrics/AbcSize:
 
 AllCops:
   Exclude:
-    - constant.rb
     - secret_token.rb
+    - Gemfile

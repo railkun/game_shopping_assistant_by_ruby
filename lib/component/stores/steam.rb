@@ -1,3 +1,8 @@
+NO_RESULT_SEARCH  = ['https://steamcommunity.com/games/593110/partnerevents/view/1714119088658959583'].freeze
+STEAM_URL         = 'https://store.steampowered.com/search/?term='.freeze
+STEAM_SEARCH_PARS = '//a[@href]'.freeze
+STEAM_PARS        = "//div[@class='game_purchase_price price']".freeze
+HREF              = 'href'.freeze
 class Steam
   def self.search(message)
     game_name = message.split(/\W+/).join('+').downcase
